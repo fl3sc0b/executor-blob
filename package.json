@@ -1,0 +1,28 @@
+{
+  "name": "executor-blob",
+  "version": "1.0.0",
+  "description": "Runnerty module: blob executor",
+  "main": "index.js",
+  "author": "fl3sc0b",
+  "license": "MIT",
+  "keywords": [
+    "runnerty",
+    "executor",
+    "blob"
+  ],
+  "scripts": {
+    "lint": "eslint '**/*.js' && prettier --check '**'"
+  },
+  "dependencies": {
+    "@runnerty/module-core": "~3.0.5",
+    "@azure/storage-blob": "^12.0.0",
+    "glob-to-regexp": "~0.4.1",
+    "is-glob": "~4.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1"
+  }
+}

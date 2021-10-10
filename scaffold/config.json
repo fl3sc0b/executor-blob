@@ -1,0 +1,11 @@
+{
+  "executors": [
+    {
+      "id": "blob_default",
+      "type": "executor-blob",
+      "apiVersion": "12.8.0",
+      "connectionString": "DefaultEndpointsProtocol=https;AccountName=...",
+      "blobContainer": "myBlobContainer"
+    }
+  ]
+}

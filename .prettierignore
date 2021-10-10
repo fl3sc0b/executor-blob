@@ -1,0 +1,10 @@
+node_modules
+.eslintignore
+.gitignore
+.prettierignore
+.npmignore
+LICENSE
+*.png
+*.txt
+TODO
+.DS_Store

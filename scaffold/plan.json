@@ -1,0 +1,85 @@
+{
+  "$schema": "https://raw.githubusercontent.com/runnerty/schemas/master/schemas/3.1/plan.json",
+  "chains": [
+    {
+      "id": "CHAIN_BLOB_SAMPLE",
+      "name": "Blob module example chain",
+      "defaults_processes": {
+        "notifications": {
+          "on_start": [
+            {
+              "id": "console_default",
+              "message": "@GETDATE('YYYY-MM-DD HH:mm:ss') START: PROCESS @GV(PROCESS_ID)"
+            }
+          ],
+          "on_fail": [
+            {
+              "id": "console_default",
+              "message": "@GETDATE('YYYY-MM-DD HH:mm:ss') ERROR: PROCESS @GV(PROCESS_ID): @GV(PROCESS_EXEC_ERR_OUTPUT)",
+              "mode": "error"
+            }
+          ],
+          "on_end": [
+            {
+              "id": "console_default",
+              "message": "@GETDATE('YYYY-MM-DD HH:mm:ss') END: PROCESS @GV(PROCESS_ID)"
+            }
+          ]
+        }
+      },
+      "processes": [
+        {
+          "id": "BLOB_UPLOAD_SAMPLE",
+          "name": "BLOB UPLOAD SAMPLE",
+          "exec": {
+            "id": "blob_default",
+            "method": "upload",
+            "local_file": "tmp/test.txt",
+            "remote_file": "dir_one/dir_two/test_up.txt"
+          }
+        },
+        {
+          "id": "BLOB_DOWNLOAD_SAMPLE",
+          "name": "BLOB DOWNLOAD SAMPLE",
+          "depends_process": {"$end": "BLOB_UPLOAD_SAMPLE"},
+          "exec": {
+            "id": "blob_default",
+            "method": "download",
+            "remote_file": "test.txt",
+            "local_file": "tmp/test_down.txt"
+          }
+        },
+        {
+          "id": "BLOB_DELETE_SAMPLE",
+          "name": "BLOB DELETE SAMPLE",
+          "depends_process": {"$end": "BLOB_DOWNLOAD_SAMPLE"},
+          "exec": {
+            "id": "blob_default",
+            "method": "delete",
+            "remote_path": "folder_test/foo.txt"
+          }
+        },
+        {
+          "id": "BLOB_DELETE_ARRAY_SAMPLE",
+          "name": "BLOB DELETE ARRAY SAMPLE",
+          "depends_process": {"$end": "BLOB_DELETE_SAMPLE"},
+          "exec": {
+            "id": "blob_default",
+            "method": "delete",
+            "remote_path": ["folder_test/sample.txt", "folder_test/sample.zip"]
+          }
+        },
+        {
+          "id": "BLOB_DELETE_GLOB_PATTERN_SAMPLE",
+          "name": "BLOB DELETE GLOB PATTERN SAMPLE",
+          "depends_process": {"$end": "BLOB_DELETE_ARRAY_SAMPLE"},
+          "exec": {
+            "id": "blob_default",
+            "method": "delete",
+            "remote_path": "folder_test/*.txt"
+          }
+        }
+      ]
+    }
+  ]
+}

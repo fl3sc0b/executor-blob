@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "executor-blob",
+  "definitions": {
+    "config": {
+      "type": "object",
+      "required": ["id", "type", "apiVersion", "connectionString", "blobContainer"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "pattern": "executor-blob"
+        },
+        "apiVersion": {
+          "type": "string"
+        },
+        "connectionString": {
+          "type": "string"
+        },
+        "blobContainer": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        }
+      }
+    },
+    "params": {
+      "type": "object",
+      "anyOf": [
+        {
+          "required": ["id", "local_file", "remote_file"],
+          "properties": {
+            "id": { "type": "string" },
+            "local_file": { "type": "string" },
+            "remote_file": { "type": "string" },
+            "method": { "type": "string", "enum": ["upload", "download"] },
+            "blobContainer": { "type": "string" }
+          }
+        },
+        {
+          "required": ["id", "remote_path"],
+          "properties": {
+            "id": { "type": "string" },
+            "remote_path": { "type": ["string", "array"] },
+            "method": { "type": "string", "enum": ["delete"] },
+            "blobContainer": { "type": "string" }
+          }
+        }
+      ]
+    }
+  }
+}

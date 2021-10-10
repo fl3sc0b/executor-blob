@@ -1,0 +1,9 @@
+.vscode
+.npmignore
+api
+node_modules
+samples
+*.md
+*.json
+.DS_Store
+LICENSE
